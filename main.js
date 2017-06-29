@@ -1,19 +1,19 @@
-var todoInput = document.querySelector('.new-todo');
+const list = document.querySelector('.todo-list');
+const input = document.querySelector('.new-todo');
 
-var todoList = document.querySelector('.todo-list');
+function addTodo(event) {
+  if (event.keyCode === 13) { 
+    let text = input.value; 
+    let html = itemTemplate(text); 
 
-todoInput.addEventListener('keydown', function addListItem(event) {
+    list.insertAdjacentHTML('beforeend', html);
 
-  if ( event.keyCode == 13 ) {
-
-    event.target.value = "";
-
-    var newTodoLi = document.createElement('li');
-
-    newTodoLi .textContent = todoContent;
-
-    todoList.appendChild(newTodoLi);
+    input.value = "";
   }
+}
 
-  return event;
-});
+function itemTemplate (text) {
+  return '<li><div class="view"><label>' + text + '</label></div></li>';
+}
+
+input.addEventListener('keypress', addTodo);
